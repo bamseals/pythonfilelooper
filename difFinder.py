@@ -1,6 +1,7 @@
 import os
+from datetime import datetime
 
-def list_unique_files(folder1, folder2):
+def write_unique_files_to_new_text(folder1, folder2):
     unique_to_folder1 = []
     unique_to_folder2 = []
 
@@ -30,20 +31,27 @@ def list_unique_files(folder1, folder2):
             elif os.path.getsize(source_file_path) != os.path.getsize(dest_file_path):
                 unique_to_folder2.append(source_file_path)
 
-    return unique_to_folder1, unique_to_folder2
+    # Generate unique filename based on current date and time
+    now = datetime.now()
+    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
+    output_file = f"unique_files_{timestamp}.txt"
+
+    # Write results to the new text file
+    with open(output_file, 'w') as f:
+        f.write("Files unique to folder 1:\n")
+        for file_path in unique_to_folder1:
+            f.write(file_path + '\n')
+
+        f.write("\nFiles unique to folder 2:\n")
+        for file_path in unique_to_folder2:
+            f.write(file_path + '\n')
+
+    return output_file
 
 # Prompt user for folder paths
 folder1 = input("Enter the path of folder 1: ")
 folder2 = input("Enter the path of folder 2: ")
 
-# Get lists of unique files
-unique_to_folder1, unique_to_folder2 = list_unique_files(folder1, folder2)
-
-# Print results
-print("Files unique to folder 1:")
-for file_path in unique_to_folder1:
-    print(file_path)
-
-print("\nFiles unique to folder 2:")
-for file_path in unique_to_folder2:
-    print(file_path)
+# Write unique files to a new text file
+output_file = write_unique_files_to_new_text(folder1, folder2)
+print(f"Results written to {output_file}")
