@@ -40,11 +40,18 @@ def write_unique_files_to_new_text(folder1, folder2):
     with open(output_file, 'w') as f:
         f.write("Files unique to folder 1:\n")
         for file_path in unique_to_folder1:
+            try:
+                f.write(file_path + '\n')
+            except:
+                print("error writing " + file_path)
             f.write(file_path + '\n')
 
         f.write("\nFiles unique to folder 2:\n")
         for file_path in unique_to_folder2:
-            f.write(file_path + '\n')
+            try:
+                f.write(file_path + '\n')
+            except:
+                print("error writing " + file_path)
 
     return output_file
 
