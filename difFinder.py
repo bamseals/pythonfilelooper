@@ -5,7 +5,7 @@ def write_unique_files_to_new_text(folder1, folder2):
     unique_to_folder1 = []
     unique_to_folder2 = []
 
-    # Traverse folder1
+    # Traverse folder 1
     for root, dirs, files in os.walk(folder1):
         for file in files:
             source_file_path = os.path.join(root, file)
@@ -18,7 +18,7 @@ def write_unique_files_to_new_text(folder1, folder2):
             elif os.path.getsize(source_file_path) != os.path.getsize(dest_file_path):
                 unique_to_folder1.append(source_file_path)
 
-    # Traverse folder2
+    # Traverse folder 2
     for root, dirs, files in os.walk(folder2):
         for file in files:
             source_file_path = os.path.join(root, file)
